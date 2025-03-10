@@ -1,10 +1,16 @@
 /*
 Dependencies:
-*egui- UI creator
+*eframe - Framework made for egui
 *serde - Serializes and Deserializes data
  */
-use egui::Ui;
+use eframe::egui;
 use serde::{Serialize, Deserialize};
+
+/*
+Struct: App
+Purpose: Contains all logic for running GUI
+ */
+struct App{}
 
 /*
 Struct: To-Do
