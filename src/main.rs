@@ -13,16 +13,19 @@ that needs to be done by the client.
 */
 #[derive(Debug)]
 struct ToDo{
+    id: u32,
     title: String,
     description: String,
     completed: bool,
 }
 
 impl ToDo{
-    //Name: toggle_complete
-    //Purpose: toggles completed field between "true" and "false"
+    /*
+    Name: toggle_complete
+    Purpose: toggles completed field between "true" and "false"
+    */
     fn toggle_complete(&mut self){
-        if(self.completed){
+        if self.completed{
             self.completed = false;
         }
         else {
@@ -42,16 +45,23 @@ struct ToDoList{
 }
 
 impl ToDoList{
-    //Name: Add
-    //Purpose: Add a To-Do to the list
+    /*
+    Name: Add
+    Parameters: td: To-do
+    Purpose: Add a To-Do to the list
+    */
     fn add(&mut self, td: ToDo){
         self.list.push(td);
     }
 
-    //Name: Remove
-    //Purpose: Remove a To-Do from the list
-    fn remove(&mut self, td: &ToDo){
-        todo!(Figure out how to find the index of a ToDo in ToDoLIst)
+    /*
+    Name: Remove
+    Parameters: id: u32
+    Purpose: Remove a To-Do from the list
+     */
+    fn remove(&mut self, id: u32){
+        let index = self.list.iter().position(|x| x.id == id).unwrap(); //finds index of td
+        self.list.remove(index);
     }
 
 }
@@ -60,12 +70,14 @@ impl ToDoList{
 fn main() {
     //Currently create two test to-do items and them adding them to a ToDoList
     let to_do1 = ToDo{
+        id: 001,
         title: String::from( "Test ToDo"),
         description: String::from("Made to test ToDo"),
         completed: false,
     };
 
     let to_do2 = ToDo{
+        id: 002,
         title: String::from("Test ToDo: Part 2"),
         description: String::from("Another Test, duh"),
         completed: true,
@@ -76,7 +88,7 @@ fn main() {
     v.add(to_do2);
 
     //TESTS
-    //println!("{:#?}", &v);
-    //v.remove(&v.list[0]);
-    //println!("{:#?}", &v);
+    println!("Test 1: {:#?}", &v);
+    v.remove(002);
+    println!("Test 2: {:#?}", &v);
 }
