@@ -18,6 +18,19 @@ struct ToDo{
     completed: bool,
 }
 
+impl ToDo{
+    //Name: toggle_complete
+    //Purpose: toggles completed field between "true" and "false"
+    fn toggle_complete(&mut self){
+        if(self.completed){
+            self.completed = false;
+        }
+        else {
+            self.completed = true;
+        }
+    }
+}
+
 /*
 Struct: To-Do List
 Purpose: Holds a list of To-Do values
@@ -29,17 +42,23 @@ struct ToDoList{
 }
 
 impl ToDoList{
-    //Name - Add
-    //Purpose - Add a To-Do to the list
+    //Name: Add
+    //Purpose: Add a To-Do to the list
     fn add(&mut self, td: ToDo){
         self.list.push(td);
+    }
+
+    //Name: Remove
+    //Purpose: Remove a To-Do from the list
+    fn remove(&mut self, td: &ToDo){
+        todo!(Figure out how to find the index of a ToDo in ToDoLIst)
     }
 
 }
 
 //Main Function
 fn main() {
-    //Currently create two test to-do items and them adding them to a ToDoList to be printed
+    //Currently create two test to-do items and them adding them to a ToDoList
     let to_do1 = ToDo{
         title: String::from( "Test ToDo"),
         description: String::from("Made to test ToDo"),
@@ -55,5 +74,9 @@ fn main() {
     let mut v = ToDoList{ list: Vec::new() };
     v.add(to_do1);
     v.add(to_do2);
-    println!("{:#?}", &v);
+
+    //TESTS
+    //println!("{:#?}", &v);
+    //v.remove(&v.list[0]);
+    //println!("{:#?}", &v);
 }
