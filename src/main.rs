@@ -7,11 +7,32 @@ use eframe::egui;
 use serde::{Serialize, Deserialize};
 
 /*
-Struct: App
+Struct: HouseholdApp
 Purpose: Contains all logic for running GUI
  */
-struct App{}
+#[derive(Default)]
+struct HouseholdApp{}
 
+impl HouseholdApp {
+    fn new(cc: &eframe::CreationContext<'_>) -> Self {
+        // Customize egui here with cc.egui_ctx.set_fonts and cc.egui_ctx.set_visuals.
+        // Restore app state using cc.storage (requires the "persistence" feature).
+        // Use the cc.gl (a glow::Context) to create graphics shaders and buffers that you can use
+        // for e.g. egui::PaintCallback.
+        Self::default()
+    }
+}
+
+impl eframe::App for HouseholdApp {
+    fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
+        egui::CentralPanel::default().show(ctx, |ui| {
+            ui.heading("Hello World!");
+
+            //add UI elements here
+
+        });
+    }
+}
 /*
 Struct: To-Do
 Purpose: Holds information for some task
@@ -94,7 +115,11 @@ fn main() {
     v.add(to_do2);
 
     //TESTS
-    println!("Test 1: {:#?}", &v);
-    v.remove(002);
-    println!("Test 2: {:#?}", &v);
+
+    //Runs App
+    eframe::run_native(
+        "Household Manager",
+        eframe::NativeOptions::default(),
+        Box::new(|cc| Ok(Box::new(HouseholdApp::new(cc)))),
+    ).expect("Household Manager failed to Load")
 }
